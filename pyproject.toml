@@ -1,0 +1,75 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agent-security-scanner"
+version = "0.1.0"
+description = "Static security analysis for AI agents - ESLint for LangChain, CrewAI, and AutoGPT"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.9"
+authors = [
+    { name = "Phoenix Assistant", email = "hello@phoenix-assistant.dev" }
+]
+keywords = [
+    "ai",
+    "agent",
+    "security",
+    "static-analysis",
+    "langchain",
+    "prompt-injection",
+    "llm",
+    "owasp"
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: Software Development :: Quality Assurance",
+]
+dependencies = [
+    "click>=8.0",
+    "rich>=13.0",
+    "pydantic>=2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "ruff>=0.1",
+    "mypy>=1.0",
+]
+
+[project.scripts]
+agent-scan = "agent_scanner.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/phoenix-assistant/agent-security-scanner"
+Documentation = "https://agent-security-scanner.dev"
+Repository = "https://github.com/phoenix-assistant/agent-security-scanner"
+Issues = "https://github.com/phoenix-assistant/agent-security-scanner/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agent_scanner"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+
+[tool.mypy]
+python_version = "3.9"
+strict = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
